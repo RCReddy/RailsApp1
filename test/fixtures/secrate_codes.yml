@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  secrate_code: MyString
+  user: 
+
+two:
+  secrate_code: MyString
+  user: 

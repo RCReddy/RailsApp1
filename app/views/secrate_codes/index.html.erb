@@ -1,0 +1,36 @@
+<%- model_class = SecrateCode -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<div id = "list">
+  <%= render :partial=>"list"%>
+</div>
+<span id="spinner" style="display:none;">
+  Please wait....
+</span>
+<%= select_tag "number_of_codes", options_for_select([1, 10, 20, 50, 100], 10) %>
+<div id="generate" class = 'btn btn-primary'>Generate secrate code</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(document).on('click', '#generate', function(){
+      var number_of_codes = $("#number_of_codes").val();
+    $.ajax({
+      type: "POST",
+      url: '<%= generate_secrate_codes_path%>',
+      data: {number_of_codes:number_of_codes},
+      beforeSend: function(xhr, settings) {
+        $('#spinner').show();
+      },
+      success: function(msg){
+      $('#list').html(msg);
+        
+      },
+      complete: function(jqXHR, textStatus) {
+        $('#spinner').hide();
+      }
+    }); 
+     });
+  });
+ 
+</script>
